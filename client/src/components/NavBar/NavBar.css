@@ -1,0 +1,9 @@
+.topnavland {
+    display: flex;
+    background-color: #333;
+    height: 55px;
+    justify-content: flex-end;
+  }
+.navlogo {
+    display: flex;
+}

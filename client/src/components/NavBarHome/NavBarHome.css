@@ -1,0 +1,63 @@
+.topnav {
+    display: flex;
+    flex-direction: row;
+    background-color: #333;
+    height: 55px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .links{
+    display: flex;
+    flex-direction: row;
+    width:300px;
+    align-items: center;
+    height: 55px;
+  }
+  .searchlogo{
+    display: flex;
+    flex-direction: row;
+    width:400px;
+    align-items: center;
+    justify-content: flex-end;
+
+  }
+.navlogo {
+    display: flex;
+    height:55px; 
+    width: 55px;
+}
+.linkNav {
+    display: flex;
+    text-decoration: none;
+    height: 18px;
+    padding: 16px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color:  rgb(64, 194, 125);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none; 
+    margin-right: 3px;
+ 
+  }
+  .linkNav:hover {
+    background-color:whitesmoke;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #000;
+    border: rgba(46, 229, 157, 0.4) solid 2px;
+  }
+  .dogapi{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    font-size: 35px;
+    font-family: 'Bungee Shade', cursive;
+    color:whitesmoke;
+    margin-left: 70px;
+  }

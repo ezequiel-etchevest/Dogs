@@ -1,0 +1,47 @@
+.home-container{
+    display: flex;
+    flex-direction: column;
+    background-image: url('../../images/background.jpg');
+}
+.component-container{
+    background-color: whitesmoke;
+}
+
+.select-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+select{
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    font-weight: bold;
+    height: 30px;
+    padding: 5px;
+    width: 250px;
+}
+select:focus{ outline: none;}
+option{
+    font-weight: bold;
+}
+
+.dogCards{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.title{
+    display: flex;
+    font-size: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+}
