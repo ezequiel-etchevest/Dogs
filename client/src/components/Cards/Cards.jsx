@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import defaultIMG from '../../images/defaultIMG.jpg'
 import './Cards.css'
 
-const DogCard = ({ id, name, image, temperaments, weight_max, weight_min, height_min, height_max, life_span }) => {
+const DogCard = ({ id, name, image, temperaments, weight_max, weight_min, height_min, height_max, life_span, createdDB }) => {
     return(
 
             <div className='dogscard'>

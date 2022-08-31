@@ -20,7 +20,7 @@ const [dogsPerPage, /*setDogsPerPage*/] = useState(8); // número de dogs por p�
 const lastDogIndex = currentPage * dogsPerPage // Calcular el indice de inicio 
 const firstDogIndex = lastDogIndex - dogsPerPage // Calcular el indice de final , estos 2 indices servirán para hacer el corte por página y renderize los que estan entre los 2 índices 
 const currentDogs = allDogs.slice(firstDogIndex, lastDogIndex)  // serían los perros que se van a renderizar según los índices
-const [/*order*/, setOrder] = useState("")
+const [/*order*/, setOrder] = useState('')
 
 
 const paged = (pageNumber) => {  // esta función sirve para setear la página actual , recibirá como prop el número de pagina seleccionado
@@ -31,10 +31,6 @@ useEffect (() => {
     dispatch(getDogs())
     dispatch(getTemperaments())
 }, [dispatch])
-
-// useEffect(() => {
-// }, [dispatch])
-
 
 const handleClick = (e) =>{
     e.preventDefault()
@@ -101,7 +97,7 @@ return(
                     <option value = 'Created'> Created </option>
                     <option value = 'Existing'> Existing </option>
                 </select>
-                <button className='search' onClick = {e => { handleClick(e) }}> Reload Dogs </button>
+                <button className='reload' onClick = {e => { handleClick(e) }}> Reload Dogs </button>
             </div>
             <Paged
                 dogsPerPage =  {dogsPerPage}
@@ -113,8 +109,8 @@ return(
         <div className='dogCards'>
             {
             currentDogs.length > 0
-            ? currentDogs !== "1"
-                ? currentDogs.map(e => { return( 
+            ? currentDogs !== '1'
+                ? currentDogs.map(e => { return(    
                             <Card
                                 key = {e.id}
                                 id = {e.id} 

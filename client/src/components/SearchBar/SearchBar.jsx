@@ -7,7 +7,6 @@ import './SearchBar.css'
 const SearchBar = () => {
     const dispatch = useDispatch()
     const[name, setName] = useState('')
-   // const [/*currentPage*/, setCurrentPage] = useState('')
     
     const handleInputChange = (e) => {
         e.preventDefault()

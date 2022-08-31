@@ -55,12 +55,11 @@ const getAllBreeds = async () => {
     return allBreeds
 } ;
 const createDog = async (name , height_max, height_min, weight_max, weight_min, life_span, image, temperaments) => {
-const newDog  = await Dog.create({
+    try {
+        const newDog  = await Dog.create({
             name , height_max, height_min, weight_max, weight_min, life_span, image
          })
          
-         //FALTAN AGREGAR CONDICIONANTES EN CASO DE QUE NO SE PASE LA INFO CORRECTA -- MANEJO DE ERROR
-
     temperaments.forEach(async element => {           //recorro el argumento temperaments y busco el valor en mi DB.
         const temp = await Temperament.findAll({      //guardo el objeto encontrado donde el elemento coincide con el name en la DB.
                 where: {name: element}
@@ -68,7 +67,12 @@ const newDog  = await Dog.create({
           newDog.addTemperament(temp)           //vinculo el objeto a mi Dog creado.
         });
          return newDog
+    } catch (error) {
+        console.log(error)
+    }
+
 };
+
 
 module.exports = {
     getAllBreeds,

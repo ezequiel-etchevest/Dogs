@@ -1,30 +1,42 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { getDetail } from '../../actions';
+import { getDetail, deleteDog } from '../../actions';
 import defaultIMG from '../../images/defaultIMG.jpg'
 import './Detail.css'
 import NavBarDetail from '../NavBarHome/NavBarDetail';
-
+import Loader  from '../../Loader/Loader';
+import NotFound from '../../NotFound/NotFound';
 
 export default function Detail(){
 
     const dispatch = useDispatch()
     const detailDog = useSelector((state) => state.detail)
+    const history = useHistory()
     const { id } = useParams();
+
 
     useEffect(() => {
         dispatch(getDetail(id))
     }, [dispatch, id])
 
+    const handleDelete =(e) => {
+        e.preventDefault()
+        dispatch(deleteDog(id))
+        alert('Dog deleted Successfully')
+        history.push('/home')
+    }
+    
 
     return(
         <React.Fragment>
         <NavBarDetail/>
+
         <div className='detail-container'>
             {
-                detailDog.length > 0 ? 
-                <div className='dogscardD'>
+                Array.isArray(detailDog)
+                ? detailDog.length > 0 
+                ? <div className='dogscardD'>
 
                     <div className='cardtitleD'>
                         <h1 className='text-titleD'>{detailDog[0].name}</h1>
@@ -59,11 +71,15 @@ export default function Detail(){
                             : <div className='lineup'><h3 className='colored'> Bred For: </h3> <h3 className='text-bodyD'> Unknown </h3></div>
                         }
                     </div>
-                    
+                    {
+                        detailDog[0].createdDB ? <button className='delete' onClick={e => {handleDelete(e)}} > Delete </button> : null
+                    }
                 </div>
-                : <p>Loading ... </p>
+                : <Loader/>
+                :<NotFound/>
             }
+
         </div>
-            </React.Fragment>
+        </React.Fragment>
     )
 }

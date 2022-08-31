@@ -1,4 +1,4 @@
-import { GET_DOGS, ORDER_ASCDESC, ORDER_BY_WEIGHT, FILTER_BY_CREATION, GET_DOGS_NAMES, GET_TEMPERAMENTS, FILTER_BY_TEMP, POST_DOG, GET_DETAILS } from "../actions";
+import { GET_DOGS, ORDER_ASCDESC, ORDER_BY_WEIGHT, FILTER_BY_CREATION, GET_DOGS_NAMES, GET_TEMPERAMENTS, FILTER_BY_TEMP, POST_DOG, GET_DETAILS, DELETE_DOG } from "../actions";
 
 const initialState = {
     dogs: [], 
@@ -49,11 +49,17 @@ const rootReducer = (state = initialState, action) => {
                 }
 
         case GET_DOGS_NAMES:
-                return{
-                ...state,
-                dogs: action.payload
+            if(Array.isArray(action.payload)){
+                return {
+                    ...state,
+                    dogs: action.payload
                 }
-                
+            } else {
+                return {
+                    ...state,
+                    dogs: '1'
+                }
+            }
         case GET_TEMPERAMENTS:
             return{
                 ...state,
@@ -81,6 +87,10 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
                 detail: action.payload
+            }
+        case DELETE_DOG :
+            return{
+                ...state
             }
         default:
             return state;

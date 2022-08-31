@@ -12,8 +12,8 @@ export default function Paged( {dogsPerPage, allDogs, paged, currentPage} ){
             <ul className='paged'>
             <div onClick={()=>paged(currentPage === 1? currentPage : currentPage - 1 )} className='arrow' >⫷</div>
                 {pageNumbers?.map(num => (
-                    <div key = { num } className={ currentPage === num ? 'numberAct' : 'number'}>
-                        <div onClick = {()=> paged(num)}> { num } </div>                       
+                    <div key = { num } className={ currentPage === num ? 'numberAct' : 'number'} onClick = {()=> paged(num)}>
+                        <div > { num } </div>                       
                     </div>
                 ))}
             <div onClick={()=>paged(currentPage === pageNumbers.length? currentPage : currentPage + 1  )} className='arrow'>⫸</div>

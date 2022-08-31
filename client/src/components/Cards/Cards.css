@@ -88,7 +88,7 @@
     -webkit-box-shadow: 0px 0px 6px 6px rgb(64, 194, 125);
     height: 280px;
     width: 400px;
-    object-fit: cover;
+    object-fit:fill;
     margin-bottom: 20px;
     margin-top: 10px;
     }

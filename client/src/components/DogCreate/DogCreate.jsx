@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {getTemperaments, postDog } from '../../actions/index.js'
+import {getDogs, getTemperaments, postDog } from '../../actions/index.js'
 import formValidation from '../DogCreate/formValidation';
 import './DogCreate.css'
 import NavBarCreateDog from '../NavBarHome/NavBarCreateDog';
@@ -9,8 +9,10 @@ import NavBarCreateDog from '../NavBarHome/NavBarCreateDog';
 
 
 const DogCreate = () => {
+
 const dispatch = useDispatch()
 const temperaments = useSelector((state) => state.temperaments)
+const allDogs = useSelector((state) => state.dogs)
 const history = useHistory()
 const [errors, setErrors] = useState({})
 const [validate, setValidate] = useState(false)
@@ -25,6 +27,15 @@ const [input, setInput] = useState({
     image:'',
     temperaments:[]
 })
+
+
+useEffect(() => {
+    dispatch(getTemperaments())
+    dispatch(getDogs())
+}, [dispatch]);
+
+
+
 const handleChange = (e) => {
     setInput({
         ...input,
@@ -52,26 +63,38 @@ const handleDelete = (e) => {
         })
 }
 const handleSubmit = (e) => {
-    e.preventDefault()
-    dispatch(postDog(input))
-    alert('Dog Created Successfully!')
-    setInput({    
-        name:'',
-        height_max:'',
-        height_min:'',
-        weight_max:'',
-        weight_min:'',
-        life_span:'',
-        image:'',
-        temperaments:[]
-})
-history.push('/home')
+    const filter = allDogs.filter(dog => dog.name.toLowerCase() === input.name.toLocaleLowerCase())
+    if(filter.length){
+        e.preventDefault() 
+        return alert("Dog's Name already in use")
+    } else{
+        e.preventDefault()
+        if(!input.name || !input.weight_min || !input.weight_max || !input.height_min || !input.height_max){
+            return alert('All * fields are required');
+        }
+        if(input.temperaments.length === 0) {
+            return alert("Select at least 1 temperament")
+        }
+        if (input.temperaments.length > 5) {
+            return alert("Max 5 temperaments")
+        }else {
+            dispatch(postDog(input))
+            alert('Dog Created Successfully!')
+            setInput({    
+                name:'',
+            height_max:'',
+            height_min:'',
+            weight_max:'',
+            weight_min:'',
+            life_span:'',
+            image:'',
+            temperaments:[]
+        })
+        history.push('/home')
+        }
+    
 }
-
-
-useEffect(() => {
-    dispatch(getTemperaments())
-}, [dispatch]);
+}
 
 return(
 <div>
@@ -81,12 +104,13 @@ return(
     <div className='form-container'>
     <form onSubmit = {e => handleSubmit(e)} className='form'>
         <div className='lineupD'>
-            <label className='coloreD'>Name: </label>
+            <label className='coloreD'>* Name: </label>
             <input 
                 className='inputD'
                 type = 'text'
                 value= {input.name}
                 name= 'name'
+                placeholder='Name...'
                 onChange={e => handleChange(e)}
                 />
         </div>
@@ -95,7 +119,7 @@ return(
         }
         
         <div className='lineupD'> 
-            <label className='coloreD'>Minimum Height: </label>
+            <label className='coloreD'>* Minimum Height: </label>
             <input
                 className='inputD' 
                 type = 'number'
@@ -110,7 +134,7 @@ return(
         }
 
         <div className='lineupD'>
-            <label className='coloreD'>Maximum Height: </label>
+            <label className='coloreD'>* Maximum Height: </label>
             <input
                 className='inputD' 
                 type = 'number'
@@ -125,7 +149,7 @@ return(
         }
 
         <div className='lineupD'>
-            <label className='coloreD'>Minimum Weight: </label>
+            <label className='coloreD'>* Minimum Weight: </label>
             <input
                 className='inputD' 
                 type = 'number'
@@ -140,7 +164,7 @@ return(
         }
 
         <div className='lineupD'>
-            <label className='coloreD'>Maximum Weight: </label>
+            <label className='coloreD'>* Maximum Weight: </label>
             <input
                 className='inputD' 
                 type = 'number'
@@ -177,7 +201,7 @@ return(
                 />
         </div>
         <div className='lineupD'>
-            <span className='coloreD'> Temperaments:  </span> 
+            <div className='coloreD'> *Temperaments:  </div> 
             <select onChange ={e => handleSelect(e)}>
                 {temperaments.map((temp) =>(
                     <option value = {temp.name} key = {temp.id}>{temp.name}</option>

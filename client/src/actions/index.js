@@ -9,6 +9,8 @@ export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS'
 export const FILTER_BY_TEMP = 'FILTER_BY_TEMP'
 export const POST_DOG = 'POST_DOG'
 export const GET_DETAILS = 'GET_DETAILS'
+export const DELETE_DOG = 'DELETE_DOG'
+
 
 export const getDogs = () => {
     return async function(dispatch){
@@ -100,9 +102,24 @@ export const getDetail = (id) => {
     return async function(dispatch){
         try {
             var json = await axios('http://localhost:3001/dogs/' + id);
+            console.log(json)
             return dispatch({
                 type: GET_DETAILS,
                 payload: json.data
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }  
+}
+
+export const deleteDog = (id) => {
+    return async function(dispatch){
+        try {
+            await axios.delete('http://localhost:3001/dogs/' + id);
+            return dispatch({
+                type: DELETE_DOG,
+                payload:''
             })
         } catch (error) {
             console.log(error)
