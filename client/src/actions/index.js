@@ -10,7 +10,9 @@ export const FILTER_BY_TEMP = 'FILTER_BY_TEMP'
 export const POST_DOG = 'POST_DOG'
 export const GET_DETAILS = 'GET_DETAILS'
 export const DELETE_DOG = 'DELETE_DOG'
+export const CLEAN_DETAIL = 'CLEAN_DETAIL'
 
+export const UPDATED_DOG = 'UPDATED_DOG'
 
 export const getDogs = () => {
     return async function(dispatch){
@@ -83,13 +85,12 @@ export const filterByTemp = (temp) => {
         type: FILTER_BY_TEMP,
         payload: temp
     }
-    }
+}
 
 export const postDog = (payload) => {
     return async function(dispatch){
         try {
-            var json = await axios.post('http://localhost:3001/dogs', payload);
-            console.log(json)       
+            var json = await axios.post('http://localhost:3001/dogs', payload);       
             return json
         } catch (error) {
             console.log(error)
@@ -102,7 +103,6 @@ export const getDetail = (id) => {
     return async function(dispatch){
         try {
             var json = await axios('http://localhost:3001/dogs/' + id);
-            console.log(json)
             return dispatch({
                 type: GET_DETAILS,
                 payload: json.data
@@ -126,3 +126,10 @@ export const deleteDog = (id) => {
         }
     }  
 }
+export const cleanDetail = () => {
+    return {
+        type: CLEAN_DETAIL,
+        payload: {}
+    }
+}
+

@@ -1,4 +1,4 @@
-import { GET_DOGS, ORDER_ASCDESC, ORDER_BY_WEIGHT, FILTER_BY_CREATION, GET_DOGS_NAMES, GET_TEMPERAMENTS, FILTER_BY_TEMP, POST_DOG, GET_DETAILS, DELETE_DOG } from "../actions";
+import { GET_DOGS, ORDER_ASCDESC, ORDER_BY_WEIGHT, FILTER_BY_CREATION, GET_DOGS_NAMES, GET_TEMPERAMENTS, FILTER_BY_TEMP, POST_DOG, GET_DETAILS, DELETE_DOG, CLEAN_DETAIL } from "../actions";
 
 const initialState = {
     dogs: [], 
@@ -42,11 +42,18 @@ const rootReducer = (state = initialState, action) => {
         case FILTER_BY_CREATION:
             const allDogs3 = state.allDogs
             const creationFilter = action.payload === 'Created'
-            ? allDogs3.filter(e =>  e.createdDB ) : allDogs3.filter(e => !e.createdDB)
+            ? allDogs3.filter(e =>  e.createdDB ) 
+            : allDogs3.filter(e => !e.createdDB)
+            if(!creationFilter.length){
+                alert('You must create a dog first')
                 return {
                     ...state,
-                    dogs: action.payload === 'All' ? state.allDogs : creationFilter
+                    dogs: '1'
                 }
+            }else return {
+                    ...state,
+                    dogs: action.payload === 'All' ? state.allDogs : creationFilter
+            }
 
         case GET_DOGS_NAMES:
             if(Array.isArray(action.payload)){
@@ -92,6 +99,12 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state
             }
+        case CLEAN_DETAIL:
+            return{
+                ...state,
+                detail: action.payload
+            }
+
         default:
             return state;
     }

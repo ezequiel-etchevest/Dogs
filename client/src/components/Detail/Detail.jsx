@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { getDetail, deleteDog } from '../../actions';
+import { getDetail, deleteDog, cleanDetail } from '../../actions';
 import defaultIMG from '../../images/defaultIMG.jpg'
 import './Detail.css'
 import NavBarDetail from '../NavBarHome/NavBarDetail';
-import Loader  from '../../Loader/Loader';
-import NotFound from '../../NotFound/NotFound';
+import Loader  from '../Loader/Loader';
+import NotFound from '../NotFound/NotFound';
 
 export default function Detail(){
 
@@ -14,11 +14,17 @@ export default function Detail(){
     const detailDog = useSelector((state) => state.detail)
     const history = useHistory()
     const { id } = useParams();
-
-
+    
+    
     useEffect(() => {
-        dispatch(getDetail(id))
-    }, [dispatch, id])
+        if(id){
+            dispatch(getDetail(id))
+        }
+        return () => {
+            dispatch(cleanDetail())
+        }
+    },[dispatch, id])
+
 
     const handleDelete =(e) => {
         e.preventDefault()
@@ -26,17 +32,20 @@ export default function Detail(){
         alert('Dog deleted Successfully')
         history.push('/home')
     }
+
     
 
     return(
         <React.Fragment>
+
         <NavBarDetail/>
 
-        <div className='detail-container'>
+         <div className='detail-container'>
             {
-                Array.isArray(detailDog)
-                ? detailDog.length > 0 
-                ? <div className='dogscardD'>
+                detailDog.length > 0 ?
+                Array.isArray(detailDog)?
+
+                <div className='dogscardD'>
 
                     <div className='cardtitleD'>
                         <h1 className='text-titleD'>{detailDog[0].name}</h1>
@@ -74,12 +83,18 @@ export default function Detail(){
                     {
                         detailDog[0].createdDB ? <button className='delete' onClick={e => {handleDelete(e)}} > Delete </button> : null
                     }
+
                 </div>
+                    :<NotFound/>
                 : <Loader/>
-                :<NotFound/>
+
             }
 
         </div>
         </React.Fragment>
     )
 }
+
+
+
+

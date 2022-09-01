@@ -4,9 +4,9 @@ const { API_KEY } = process.env;
 
 const getBreedsApi = async () => {
 try{
-    const allBreeds = await axios(`https://api.thedogapi.com/v1/breeds`);
-
-    const result = await allBreeds.data.map(e => {
+    const allBreeds = await axios(`https://api.thedogapi.com/v1/breeds`);  //traigo todas las razas
+    
+    const result = await allBreeds.data.map(e => {              //mapeo y guardo en result las propiedades 
         return ({
             id: e.id,
             name: e.name,

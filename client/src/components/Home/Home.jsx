@@ -6,8 +6,8 @@ import Card from '../Cards/Cards.jsx'
 import Paged from '../Paged/Paged.jsx'
 import NavBarHome from '../NavBarHome/NavBarHome.jsx'
 import './Home.css'
-import NotFound from '../../NotFound/NotFound';
-import Loader  from '../../Loader/Loader';
+import NotFound from '../NotFound/NotFound';
+import Loader  from '../Loader/Loader';
 
 const Home = () => {
 const dispatch = useDispatch();
@@ -50,10 +50,10 @@ const handleOrderByWeight = (e) => {
     setOrder(`Ordenado ${e.target.value}`)
 }
 const handleFilterByCreation = (e) => {
-    e.preventDefault()
     dispatch(filterByCreation(e.target.value))
     setCurrentPage(1)
     setOrder(`Filtrado ${e.target.value}`)
+ 
 }
 
 const handleFilterTemps =(e) => {

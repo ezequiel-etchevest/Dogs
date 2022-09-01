@@ -1,7 +1,7 @@
 const  express   = require('express');
 const dogsRouter = express.Router();
 const { getAllBreeds, createDog }  = require('../Controllers/dogsRutesCont')
-const { Dog, Temperament } = require('../db');
+const { Dog } = require('../db');
 
 //dogsRouter.use(express.json())
 
@@ -65,5 +65,7 @@ dogsRouter.delete('/:id', async (req, res) => {
     }
 
 })
+
+
 
 module.exports = dogsRouter;

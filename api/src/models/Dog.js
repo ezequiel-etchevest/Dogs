@@ -38,14 +38,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    bred_for: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    origin: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
+
     createdDB: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
