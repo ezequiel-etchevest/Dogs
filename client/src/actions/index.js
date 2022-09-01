@@ -28,6 +28,21 @@ export const getDogs = () => {
     }
 }
 
+// export const getDogs = () => {
+//     return function (dispatch) {
+//         fetch('http://localhost:3001/dogs')
+//         .then((response) => response.json() )
+//         .then((res) => {
+//             return dispatch({
+//                 type: GET_DOGS,
+//                 payload: res
+//             })
+//         })
+//           .catch(error){console.log(error)}
+//     }
+// }
+
+
 export const orderDogsAscDesc = (payload) => {
     return {
         type: ORDER_ASCDESC,
@@ -54,7 +69,6 @@ export const getDogsNames = (name) => {
         try{
             if(name){
                 var json = await axios(`http://localhost:3001/dogs?name=${name}`)
-                console.log(json)
                 return dispatch({
                     type: GET_DOGS_NAMES,
                     payload: json.data

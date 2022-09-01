@@ -3,7 +3,7 @@ const dogsRouter = express.Router();
 const { getAllBreeds, createDog }  = require('../Controllers/dogsRutesCont')
 const { Dog } = require('../db');
 
-//dogsRouter.use(express.json())
+
 
 dogsRouter.get('/',async (req, res) => {
     try {
@@ -34,10 +34,10 @@ dogsRouter.get('/:id', async(req, res) => {
 
         filteredById.length 
         ? res.json(filteredById) 
-        : res.status(200).send(`The ID ${id} isn't currently in our DB.`);
+        : res.send(`The ID ${id} isn't currently in our DB.`);
 
-    } catch (Error) {
-        res.status(404).send(`Error loading Api.`);
+    } catch (error) {
+        console.log(error)
     }
 });
 
