@@ -9,7 +9,20 @@ dogsRouter.get('/',async (req, res) => {
     try {
         const {name} = req.query;
         const allBreeds = await getAllBreeds();
-        
+                
+    //     if(name){
+    //         const filteredBreeds = await allBreeds.filter(e => e.weight_min > name);            
+            
+    //         filteredBreeds.length 
+    //         ? res.json(filteredBreeds) 
+    //         : res.send(`The breed ${name} doesn't exist.`);
+       
+    //     } else res.json(allBreeds)
+
+    // } catch (error) {
+    //     console.log(error)
+    //}
+
         
         if(name){
             const filteredBreeds = await allBreeds.filter(e => e.name.toLowerCase().includes(name.toLowerCase()));            

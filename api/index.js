@@ -24,8 +24,10 @@ const { getAllTempsApi } = require('../api/src/Controllers/tempRutesCont')
 getAllTempsApi()
 
 // Syncing all the models at once.
+const PORT = 3001
+
 conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+  server.listen(process.env.PORT || PORT, () => {
+    console.log('%s listening at '+ PORT); // eslint-disable-line no-console
   });
 });
